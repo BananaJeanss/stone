@@ -3,15 +3,17 @@ extends CharacterBody2D
 @onready var Sprite = $Sprite2D
 @onready var CollisionShape = $CollisionShape2D
 @onready var Stones = get_node("/root/Node2D/stones")
-@onready var stonebox = get_node("/root/Node2D/CanvasLayer/stonebox")
+@onready var stonebox = get_node("/root/Node2D/UI/stonebox")
+@onready var spawnPoint = get_node("/root/Node2D/Spawnpoint")
 
 @export var StoneScene: PackedScene
 
 const SPEED = 350.0
 const JUMP_VELOCITY = -450.0
-const SPAWN_POS = Vector2(0, 0)
+@onready var SPAWN_POS = spawnPoint.position
 
 var available_stones = 3
+var spawn
 
 func reset_to_spawn():
 	global_position = SPAWN_POS
@@ -52,32 +54,41 @@ func stoned():
 
 		# Reset the player
 		reset_to_spawn()
-		
 	else:
 		print("No stones available")
+		return "no"
 		
 
+var squishdb = false
+
 func squish():
-	var tween = create_tween()
-	var original_scale = Sprite.scale
-	var rect_shape = CollisionShape.shape as RectangleShape2D
-	var original_size = rect_shape.size
+	if squishdb == false:
+		squishdb = true
+		var tween = create_tween()
+		var original_scale = Sprite.scale
+		var rect_shape = CollisionShape.shape as RectangleShape2D
+		var original_size = rect_shape.size
 
-	# Squash sprite
-	var squish_scale = Vector2(original_scale.x * 1.2, original_scale.y * 0.8)
-	# Squash collision shape in the same way
-	var squish_size = Vector2(original_size.x * 1.2, original_size.y * 0.8)
+		# Squash sprite
+		const squishsize = 0.2
+		const squishspeed = 0.2
+		var squish_scale = Vector2(original_scale.x * (1+squishsize), original_scale.y * (1-squishsize))
+		# Squash collision shape in the same way
+		var squish_size = Vector2(original_size.x * (1+squishsize), original_size.y * (1-squishsize))
 
-	tween.tween_property(Sprite, "scale", squish_scale, 0.1)\
-		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	tween.parallel().tween_property(rect_shape, "size", squish_size, 0.1)\
-		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		tween.tween_property(Sprite, "scale", squish_scale, squishspeed)\
+			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		tween.parallel().tween_property(rect_shape, "size", squish_size, squishspeed)\
+			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
-	# Return to normal
-	tween.tween_property(Sprite, "scale", original_scale, 0.1)\
-		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
-	tween.parallel().tween_property(rect_shape, "size", original_size, 0.1)\
-		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		# Return to normal
+		tween.tween_property(Sprite, "scale", original_scale, squishspeed)\
+			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		tween.parallel().tween_property(rect_shape, "size", original_size, squishspeed)\
+			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		
+		await tween.finished
+		squishdb = false
 
 @export var JumpParticle : PackedScene
 
@@ -90,34 +101,64 @@ func particles():
 
 var hasJumped = false
 
+@onready var bowomp = $bowomp
+@onready var spikes = get_node("/root/Node2D/spikes")
+
+var movAllow = true
+
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
+	
+	# Gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	else:
 		hasJumped = false
+		
 
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") and hasJumped == false:
+	# Handle jump
+	if Input.is_action_just_pressed("jump") and hasJumped == false and movAllow:
 		hasJumped = true
 		particles()
 		velocity.y = JUMP_VELOCITY
 	
-	# squish 
-	if is_on_floor() and velocity.y == 0 and Input.is_action_just_pressed("squish"):
+	# Squish
+	if Input.is_action_just_pressed("squish") and movAllow:
 		squish()
 	
-	# stoned
-	if Input.is_action_just_pressed("stoned"):
+	# Stoned
+	if Input.is_action_just_pressed("stoned") and movAllow:
 		stoned()
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	# 
+	# Movement input
 	var direction := Input.get_axis("left", "right")
-	if direction:
+	if direction and movAllow:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
+	# Move once
 	move_and_slide()
+
+	# Spike collision check after movement
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		if collision.get_collider() == spikes and movAllow:
+			bowomp.play(0.5)
+			if stoned() == "no":
+				reset_to_spawn()
+			break
+
+@export var Confetti : PackedScene
+
+func confparticles():
+	var _particle = Confetti.instantiate()
+	add_child(_particle)  # Parent first
+	var finPos = Vector2(global_position.x, global_position.y + -75)
+	_particle.global_position = finPos  # Then set global position
+	_particle.emitting = true
+
+
+func _on_endpoint_body_entered(body: Node2D) -> void:
+	confparticles()
+	$clap.play(1)
+	movAllow = false

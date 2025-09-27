@@ -1,0 +1,215 @@
+[gd_scene load_steps=14 format=3 uid="uid://bt0lcai0sw2bt"]
+
+[ext_resource type="Script" uid="uid://c6j4376p5o855" path="res://scripts/menu.gd" id="1_yqeox"]
+[ext_resource type="Script" uid="uid://blk0lbl4ais4u" path="res://scripts/button.gd" id="2_vjb58"]
+[ext_resource type="Script" uid="uid://27qne8t2erlc" path="res://scripts/button2.gd" id="3_4ytvr"]
+[ext_resource type="Script" uid="uid://ohu0e1lkvq37" path="res://scripts/button1.gd" id="4_g3eks"]
+[ext_resource type="Script" uid="uid://dlj1xyaugdns7" path="res://scripts/button3.gd" id="5_v86rl"]
+[ext_resource type="Script" uid="uid://5bvhialvj5y" path="res://scripts/button4.gd" id="6_g3eks"]
+[ext_resource type="Script" uid="uid://djc022wdfif84" path="res://scripts/mainmenu.gd" id="7_v86rl"]
+[ext_resource type="Texture2D" uid="uid://c8exa3suj8c3p" path="res://textures/stone game title fr.png" id="8_13sgg"]
+[ext_resource type="Shader" uid="uid://cle260hi6vb3e" path="res://scenes/menu.gdshader" id="8_i6lef"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_con2f"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 16
+border_width_top = 6
+border_width_right = 16
+border_width_bottom = 6
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_70i5f"]
+shader = ExtResource("8_i6lef")
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/line_thickness = 0.88
+
+[sub_resource type="Gradient" id="Gradient_mj5lg"]
+colors = PackedColorArray(0.0807833, 0.0807833, 0.0807833, 1, 0.233925, 0.233925, 0.233925, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ufwb2"]
+gradient = SubResource("Gradient_mj5lg")
+fill = 1
+fill_to = Vector2(1, 1)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 706.0
+offset_bottom = 371.0
+script = ExtResource("1_yqeox")
+
+[node name="SettingsPage" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 1154.0
+offset_bottom = 649.0
+
+[node name="Label" type="Label" parent="SettingsPage"]
+layout_mode = 0
+offset_left = 455.0
+offset_top = 74.0
+offset_right = 648.0
+offset_bottom = 143.0
+theme_override_font_sizes/font_size = 50
+text = "Settings"
+
+[node name="ColorRect" type="ColorRect" parent="SettingsPage"]
+layout_mode = 0
+offset_left = 354.0
+offset_top = 143.0
+offset_right = 755.0
+offset_bottom = 150.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsPage"]
+layout_mode = 0
+offset_left = 358.0
+offset_top = 168.0
+offset_right = 754.0
+offset_bottom = 553.0
+
+[node name="jump" type="HBoxContainer" parent="SettingsPage/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="SettingsPage/VBoxContainer/jump"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_con2f")
+text = "Jump"
+
+[node name="Button" type="Button" parent="SettingsPage/VBoxContainer/jump"]
+layout_mode = 2
+text = "aaaa
+"
+script = ExtResource("2_vjb58")
+
+[node name="left" type="HBoxContainer" parent="SettingsPage/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="SettingsPage/VBoxContainer/left"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_con2f")
+text = "Left"
+
+[node name="Button" type="Button" parent="SettingsPage/VBoxContainer/left"]
+layout_mode = 2
+text = "aaaa
+"
+script = ExtResource("3_4ytvr")
+
+[node name="right" type="HBoxContainer" parent="SettingsPage/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="SettingsPage/VBoxContainer/right"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_con2f")
+text = "Right"
+
+[node name="Button" type="Button" parent="SettingsPage/VBoxContainer/right"]
+layout_mode = 2
+text = "aaaa
+"
+script = ExtResource("4_g3eks")
+
+[node name="squish" type="HBoxContainer" parent="SettingsPage/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="SettingsPage/VBoxContainer/squish"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_con2f")
+text = "Squish"
+
+[node name="Button" type="Button" parent="SettingsPage/VBoxContainer/squish"]
+layout_mode = 2
+text = "aaaa
+"
+script = ExtResource("5_v86rl")
+
+[node name="Stone" type="HBoxContainer" parent="SettingsPage/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="SettingsPage/VBoxContainer/Stone"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_con2f")
+text = "Stone"
+
+[node name="Button" type="Button" parent="SettingsPage/VBoxContainer/Stone"]
+layout_mode = 2
+text = "aaaa
+"
+script = ExtResource("6_g3eks")
+
+[node name="MainMenuButton" type="Button" parent="SettingsPage"]
+layout_mode = 0
+offset_left = 435.0
+offset_top = 505.0
+offset_right = 666.0
+offset_bottom = 576.0
+text = "Back to Main Menu"
+script = ExtResource("7_v86rl")
+
+[node name="MainMenu" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 1153.0
+offset_bottom = 652.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
+z_index = 2
+layout_mode = 0
+offset_left = 163.0
+offset_top = 286.0
+offset_right = 402.0
+offset_bottom = 466.0
+
+[node name="Start" type="Button" parent="MainMenu/VBoxContainer"]
+z_index = 2
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Play"
+
+[node name="Settings" type="Button" parent="MainMenu/VBoxContainer"]
+z_index = 2
+layout_mode = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+text = "Settings
+"
+
+[node name="Exit" type="Button" parent="MainMenu/VBoxContainer"]
+z_index = 2
+layout_mode = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+text = "Exit"
+
+[node name="logo" type="TextureRect" parent="MainMenu"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_70i5f")
+layout_mode = 0
+offset_left = 550.0
+offset_top = 64.0
+offset_right = 1100.0
+offset_bottom = 614.0
+texture = ExtResource("8_13sgg")
+
+[node name="TextureRect2" type="TextureRect" parent="MainMenu"]
+z_index = -3
+clip_contents = true
+layout_mode = 0
+offset_right = 1156.0
+offset_bottom = 650.0
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_ufwb2")
+
+[connection signal="pressed" from="SettingsPage/VBoxContainer/jump/Button" to="SettingsPage/VBoxContainer/jump/Button" method="_on_pressed"]
+[connection signal="pressed" from="SettingsPage/VBoxContainer/left/Button" to="SettingsPage/VBoxContainer/left/Button" method="_on_pressed"]
+[connection signal="pressed" from="SettingsPage/VBoxContainer/right/Button" to="SettingsPage/VBoxContainer/right/Button" method="_on_pressed"]
+[connection signal="pressed" from="SettingsPage/VBoxContainer/squish/Button" to="SettingsPage/VBoxContainer/squish/Button" method="_on_pressed"]
+[connection signal="pressed" from="SettingsPage/VBoxContainer/Stone/Button" to="SettingsPage/VBoxContainer/Stone/Button" method="_on_pressed"]
+[connection signal="pressed" from="SettingsPage/MainMenuButton" to="SettingsPage/MainMenuButton" method="_on_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cui2w08hlo8vc"]
+
+[ext_resource type="Shader" uid="uid://xytba5y07440" path="res://scenes/confetti.gdshader" id="1_xjk0n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d1fa4"]
+shader = ExtResource("1_xjk0n")
+shader_parameter/speed = 2.0
+
+[sub_resource type="Curve" id="Curve_5xnco"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.767045, 0.449438), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_dc2e4"]
+colors = PackedColorArray(0.877616, 0.877616, 0.877616, 1, 0, 0, 0, 0)
+
+[node name="CPUParticles2D" type="CPUParticles2D"]
+material = SubResource("ShaderMaterial_d1fa4")
+rotation = -1.5708
+amount = 6
+explosiveness = 0.19
+lifetime_randomness = 0.5
+spread = 19.97
+gravity = Vector2(0, 500)
+initial_velocity_min = 257.14
+initial_velocity_max = 552.38
+scale_amount_min = 10.0
+scale_amount_max = 15.0
+scale_amount_curve = SubResource("Curve_5xnco")
+color_ramp = SubResource("Gradient_dc2e4")
