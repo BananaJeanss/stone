@@ -1,0 +1,67 @@
+[gd_scene load_steps=2 format=3 uid="uid://em08oeq4qa5e"]
+
+[ext_resource type="Texture2D" uid="uid://bb2w1efdegglm" path="res://textures/a-large-rock-with-a-grey-and-brown-color-it-is-a-solid-piece-of-rock-with-no-visible-cracks-or-crevices-png.webp" id="1_fao45"]
+
+[node name="Passed" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 399.0
+offset_top = 294.0
+offset_right = 1582.0
+offset_bottom = 903.0
+color = Color(0, 0, 0, 0.396078)
+
+[node name="Label" type="Label" parent="ColorRect"]
+offset_left = 285.0
+offset_top = 17.0
+offset_right = 914.0
+offset_bottom = 154.0
+theme_override_font_sizes/font_size = 100
+text = "Stage Passed"
+
+[node name="Time" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 413.0
+offset_top = 179.0
+offset_right = 887.0
+offset_bottom = 316.0
+theme_override_font_sizes/font_size = 50
+text = "Time: 0:00.00"
+
+[node name="stonebox" type="HBoxContainer" parent="ColorRect"]
+offset_left = 397.0
+offset_top = 293.0
+offset_right = 747.0
+offset_bottom = 407.0
+
+[node name="1" type="TextureRect" parent="ColorRect/stonebox"]
+layout_mode = 2
+texture = ExtResource("1_fao45")
+expand_mode = 2
+
+[node name="2" type="TextureRect" parent="ColorRect/stonebox"]
+layout_mode = 2
+texture = ExtResource("1_fao45")
+expand_mode = 2
+
+[node name="3" type="TextureRect" parent="ColorRect/stonebox"]
+layout_mode = 2
+texture = ExtResource("1_fao45")
+expand_mode = 2
+
+[node name="BacktoMenu" type="Button" parent="."]
+offset_left = 620.0
+offset_top = 748.0
+offset_right = 957.0
+offset_bottom = 825.0
+theme_override_font_sizes/font_size = 50
+text = "Back to Menu
+"
+
+[node name="NextStage" type="Button" parent="."]
+offset_left = 977.0
+offset_top = 749.0
+offset_right = 1314.0
+offset_bottom = 826.0
+theme_override_font_sizes/font_size = 50
+text = "Next Stage"

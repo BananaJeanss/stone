@@ -15,6 +15,10 @@ run/main_scene="uid://bt0lcai0sw2bt"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+TimerManager="*res://TimerManager.gd"
+
 [display]
 
 window/size/viewport_width=1920
