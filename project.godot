@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="stone"
-run/main_scene="uid://behfh1q5td6xg"
+run/main_scene="uid://bt0lcai0sw2bt"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 

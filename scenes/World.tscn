@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=4 uid="uid://behfh1q5td6xg"]
+[gd_scene load_steps=10 format=4 uid="uid://behfh1q5td6xg"]
 
 [ext_resource type="Texture2D" uid="uid://b05u4a3n1qlra" path="res://textures/images.png" id="1_bcbcq"]
 [ext_resource type="Script" uid="uid://lqqhpitd2wnm" path="res://scripts/character_body_2d.gd" id="2_js7pq"]
 [ext_resource type="Texture2D" uid="uid://tb8pfo6mpsdd" path="res://textures/texture_01_2.png" id="3_eu7l1"]
 [ext_resource type="PackedScene" uid="uid://cxqvbeh22lyk4" path="res://scenes/stoned.tscn" id="3_js7pq"]
+[ext_resource type="PackedScene" uid="uid://b26ux8ae23cnl" path="res://JumpParticle.tscn" id="4_1lgw5"]
+[ext_resource type="Texture2D" uid="uid://bb2w1efdegglm" path="res://textures/a-large-rock-with-a-grey-and-brown-color-it-is-a-solid-piece-of-rock-with-no-visible-cracks-or-crevices-png.webp" id="6_hlk0d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0hol4"]
 texture = ExtResource("1_bcbcq")
@@ -416,6 +418,7 @@ tile_set = SubResource("TileSet_q6r6c")
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("2_js7pq")
 StoneScene = ExtResource("3_js7pq")
+JumpParticle = ExtResource("4_1lgw5")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 scale = Vector2(0.0996094, 0.0996094)
@@ -432,3 +435,26 @@ scale = Vector2(0.0996094, 0.0996094)
 position_smoothing_enabled = true
 
 [node name="stones" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="stonebox" type="HBoxContainer" parent="CanvasLayer"]
+offset_left = 10.0
+offset_top = 6.0
+offset_right = 328.0
+offset_bottom = 84.0
+
+[node name="1" type="TextureRect" parent="CanvasLayer/stonebox"]
+layout_mode = 2
+texture = ExtResource("6_hlk0d")
+expand_mode = 2
+
+[node name="2" type="TextureRect" parent="CanvasLayer/stonebox"]
+layout_mode = 2
+texture = ExtResource("6_hlk0d")
+expand_mode = 2
+
+[node name="3" type="TextureRect" parent="CanvasLayer/stonebox"]
+layout_mode = 2
+texture = ExtResource("6_hlk0d")
+expand_mode = 2
