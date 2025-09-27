@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var timelabel = $UI/TimeL
 
-const timeprefix = "Time: "
+const timeprefix = ""
 
 var elapsed_time := 0.0  # time in seconds
 var isCounting = true
