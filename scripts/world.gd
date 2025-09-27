@@ -24,5 +24,6 @@ func _process(delta: float) -> void:
 		timelabel.text = timeprefix + formatted_time
 
 
-func _on_endpoint_body_entered(body: Node2D) -> void:
-	isCounting = false
+func _on_endpoint_body_entered(_body: Node2D) -> void:
+	if _body is CharacterBody2D:
+		isCounting = false

@@ -59,36 +59,44 @@ func stoned():
 		return "no"
 		
 
-var squishdb = false
-
+var squishdb = false;
 func squish():
-	if squishdb == false:
-		squishdb = true
-		var tween = create_tween()
-		var original_scale = Sprite.scale
-		var rect_shape = CollisionShape.shape as RectangleShape2D
-		var original_size = rect_shape.size
+	if squishdb:
+		return
+	squishdb = true
 
-		# Squash sprite
-		const squishsize = 0.2
-		const squishspeed = 0.2
-		var squish_scale = Vector2(original_scale.x * (1+squishsize), original_scale.y * (1-squishsize))
-		# Squash collision shape in the same way
-		var squish_size = Vector2(original_size.x * (1+squishsize), original_size.y * (1-squishsize))
+	# Ensure sprite is centered (so scaling is around center)
+	if Sprite.has_method("set_centered"):
+		Sprite.centered = true
 
-		tween.tween_property(Sprite, "scale", squish_scale, squishspeed)\
-			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-		tween.parallel().tween_property(rect_shape, "size", squish_size, squishspeed)\
-			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	# Duplicate the shape so we don't edit a shared resource
+	var rect_shape : RectangleShape2D = (CollisionShape.shape as RectangleShape2D).duplicate() as RectangleShape2D
+	CollisionShape.shape = rect_shape
 
-		# Return to normal
-		tween.tween_property(Sprite, "scale", original_scale, squishspeed)\
-			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
-		tween.parallel().tween_property(rect_shape, "size", original_size, squishspeed)\
-			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
-		
-		await tween.finished
-		squishdb = false
+	var tween = create_tween()
+	var original_scale = Sprite.scale
+	var original_size = rect_shape.size
+
+	# squish parameters
+	const s = 0.2         # relative squash factor (20%)
+	const dur = 0.15      # speed
+
+	# Area-preserving/stretchy scale:
+	# x scales up by (1 + s); y scales down by dividing by (1 + s)
+	var squish_scale = Vector2(original_scale.x * (1.0 + s), original_scale.y / (1.0 + s))
+	var squish_size  = Vector2(original_size.x  * (1.0 + s), original_size.y  / (1.0 + s))
+
+	# Apply squash
+	tween.tween_property(Sprite, "scale", squish_scale, dur).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(rect_shape, "size", squish_size, dur).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+	# Return to normal
+	tween.tween_property(Sprite, "scale", original_scale, dur).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	tween.parallel().tween_property(rect_shape, "size", original_size, dur).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+
+	await tween.finished
+	squishdb = false
+
 
 @export var JumpParticle : PackedScene
 
@@ -119,7 +127,11 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and hasJumped == false and movAllow:
 		hasJumped = true
 		particles()
+		$Sprite2D.texture = load("res://textures/Rock man game jumping-.png")
 		velocity.y = JUMP_VELOCITY
+	
+	if hasJumped == false:
+		$Sprite2D.texture = load("res://textures/Stone game Player Standing.png")
 	
 	# Squish
 	if Input.is_action_just_pressed("squish") and movAllow:
@@ -130,9 +142,17 @@ func _physics_process(delta: float) -> void:
 		stoned()
 
 	# Movement input
-	var direction := Input.get_axis("left", "right")
-	if direction and movAllow:
+	var direction = Input.get_axis("left", "right")
+
+	if direction != 0 and movAllow:
 		velocity.x = direction * SPEED
+		
+		# Flip the sprite based on direction
+		if direction < 0:
+			$Sprite2D.flip_h = true
+		elif direction > 0:
+			$Sprite2D.flip_h = false
+
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
@@ -158,7 +178,8 @@ func confparticles():
 	_particle.emitting = true
 
 
-func _on_endpoint_body_entered(body: Node2D) -> void:
-	confparticles()
-	$clap.play(1)
-	movAllow = false
+func _on_endpoint_body_entered(_body: Node2D) -> void:
+	if _body is CharacterBody2D:
+		confparticles()
+		$clap.play(1)
+		movAllow = false

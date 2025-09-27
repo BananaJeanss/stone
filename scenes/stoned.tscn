@@ -1,20 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://cxqvbeh22lyk4"]
+[gd_scene load_steps=6 format=3 uid="uid://cxqvbeh22lyk4"]
 
 [ext_resource type="Script" uid="uid://blu4j5w7c36n7" path="res://scripts/stoned.gd" id="1_ca15i"]
-[ext_resource type="Texture2D" uid="uid://3a1du0nn3v07" path="res://textures/image.png" id="1_qch1s"]
+[ext_resource type="Texture2D" uid="uid://b3pfjodgjhsan" path="res://textures/Stone game Player Standing.png" id="2_paoe6"]
+[ext_resource type="Shader" uid="uid://hjj3rim2nxyx" path="res://scenes/stoned.gdshader" id="2_v8p82"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uvf5k"]
-size = Vector2(1024, 1024)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_akoue"]
+shader = ExtResource("2_v8p82")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v8p82"]
+size = Vector2(562.196, 1024)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_ca15i")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.0996094, 0.0996094)
-texture = ExtResource("1_qch1s")
+texture_filter = 1
+material = SubResource("ShaderMaterial_akoue")
+position = Vector2(4, 1906)
+scale = Vector2(4, 3.84766)
+texture = ExtResource("2_paoe6")
 offset = Vector2(0, -512)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -51)
+position = Vector2(-3, -51)
 scale = Vector2(0.0996094, 0.0996094)
-shape = SubResource("RectangleShape2D_uvf5k")
+shape = SubResource("RectangleShape2D_v8p82")

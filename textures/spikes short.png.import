@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7nadyfp2tbt"
-path="res://.godot/imported/Rock man game jumping-.png-342dfd52c2979485ad5e729912118bab.ctex"
+uid="uid://7tfhbdaflsih"
+path="res://.godot/imported/spikes short.png-a2b2ebde34af87bc13811b3dae653a54.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/Rock man game jumping-.png"
-dest_files=["res://.godot/imported/Rock man game jumping-.png-342dfd52c2979485ad5e729912118bab.ctex"]
+source_file="res://textures/spikes short.png"
+dest_files=["res://.godot/imported/spikes short.png-a2b2ebde34af87bc13811b3dae653a54.ctex"]
 
 [params]
 
