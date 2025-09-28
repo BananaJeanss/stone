@@ -75,22 +75,23 @@ func format_time(time: float) -> String:
 func _on_endpoint_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
 		is_counting = false
-		var stage_name = "stage1"
+		var stage_name = "stage2"
 		var pbt = format_time(TimerManager.best_times.get(stage_name, INF))
 		$Passed/ColorRect/Time.text = "Time: " + formatted_time
 		$Passed/ColorRect/PBTime.text = "Personal Best: " + pbt
 		$Passed.visible = true
-
-		
+		var asdf 
+		if TimerManager.best_times.get(stage_name, INF) < elapsed_time:
+			asdf = true
 
 		if elapsed_time < TimerManager.best_times.get(stage_name, INF):
 			TimerManager.save_pb(stage_name, elapsed_time)
 
-		print("Best for this stage:", TimerManager.best_times[stage_name])
+		if asdf == false:
+			print("Best for this stage:", TimerManager.best_times[stage_name])
 
 func _on_backto_menu_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")
 
-
 func _on_next_stage_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/world2.tscn")
+	get_tree().change_scene_to_file("res://scenes/world3.tscn")

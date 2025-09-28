@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bt0lcai0sw2bt"]
+[gd_scene load_steps=20 format=3 uid="uid://bt0lcai0sw2bt"]
 
 [ext_resource type="Script" uid="uid://c6j4376p5o855" path="res://scripts/menu.gd" id="1_yqeox"]
 [ext_resource type="Script" uid="uid://blk0lbl4ais4u" path="res://scripts/button.gd" id="2_vjb58"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://djc022wdfif84" path="res://scripts/mainmenu.gd" id="7_v86rl"]
 [ext_resource type="Texture2D" uid="uid://c8exa3suj8c3p" path="res://textures/stone game title fr.png" id="8_13sgg"]
 [ext_resource type="Shader" uid="uid://cle260hi6vb3e" path="res://scenes/menu.gdshader" id="8_i6lef"]
+[ext_resource type="Texture2D" uid="uid://cb5eajeq47cu0" path="res://textures/pixil-frame-0.png" id="9_ufwb2"]
 [ext_resource type="FontFile" uid="uid://b3gix6t1pih4a" path="res://fonts/SUSEMono-Italic-VariableFont_wght.ttf" id="10_70i5f"]
 [ext_resource type="Script" uid="uid://bjogwympullyx" path="res://scenes/pb.gd" id="11_mj5lg"]
 
@@ -19,6 +20,11 @@ border_width_top = 6
 border_width_right = 16
 border_width_bottom = 6
 border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6cdou"]
+shader = ExtResource("8_i6lef")
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/line_thickness = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_70i5f"]
 shader = ExtResource("8_i6lef")
@@ -41,10 +47,10 @@ border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
-corner_radius_top_left = 55
-corner_radius_top_right = 15
-corner_radius_bottom_right = 55
-corner_radius_bottom_left = 15
+corner_radius_top_left = 15
+corner_radius_top_right = 55
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 55
 shadow_color = Color(0, 0, 0, 0.32549)
 shadow_size = 50
 anti_aliasing_size = 10.0
@@ -62,21 +68,12 @@ anchors_preset = 0
 offset_right = 1924.0
 offset_bottom = 1082.0
 
-[node name="Label" type="Label" parent="SettingsPage"]
-layout_mode = 0
-offset_left = 800.0
-offset_top = 70.0
-offset_right = 1090.0
-offset_bottom = 173.0
-theme_override_font_sizes/font_size = 75
-text = "Settings"
-
 [node name="ColorRect" type="ColorRect" parent="SettingsPage"]
 layout_mode = 0
-offset_left = 466.0
-offset_top = 187.0
-offset_right = 1421.0
-offset_bottom = 194.0
+offset_left = 462.0
+offset_top = 232.0
+offset_right = 1417.0
+offset_bottom = 239.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SettingsPage"]
 layout_mode = 0
@@ -181,8 +178,17 @@ theme_override_font_sizes/font_size = 75
 text = "Back to Main Menu"
 script = ExtResource("7_v86rl")
 
+[node name="TextureRect" type="TextureRect" parent="SettingsPage"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_6cdou")
+layout_mode = 0
+offset_left = 592.0
+offset_top = -213.0
+offset_right = 1270.0
+offset_bottom = 465.0
+texture = ExtResource("9_ufwb2")
+
 [node name="MainMenu" type="Control" parent="."]
-visible = false
 anchors_preset = 0
 offset_right = 1917.0
 offset_bottom = 1084.0
@@ -240,11 +246,13 @@ theme = SubResource("Theme_i6lef")
 texture = SubResource("GradientTexture2D_ufwb2")
 
 [node name="StagesMenu" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_right = 1918.0
 offset_bottom = 1085.0
 
 [node name="Label" type="Label" parent="StagesMenu"]
+layout_mode = 0
 offset_left = 663.0
 offset_top = 74.0
 offset_right = 1203.0
@@ -253,7 +261,7 @@ theme_override_fonts/font = ExtResource("10_70i5f")
 theme_override_font_sizes/font_size = 150
 text = "Stages"
 
-[node name="Stage1" type="Button" parent="StagesMenu"]
+[node name="stage1" type="Button" parent="StagesMenu"]
 layout_mode = 0
 offset_left = 102.0
 offset_top = 490.0
@@ -267,7 +275,31 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_mj5lg")
 text = "1
 "
 
-[node name="PB" type="Label" parent="StagesMenu/Stage1"]
+[node name="PB" type="Label" parent="StagesMenu/stage1"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 181.0
+offset_right = 157.0
+offset_bottom = 216.0
+theme_override_font_sizes/font_size = 25
+text = "0:00.000"
+horizontal_alignment = 1
+script = ExtResource("11_mj5lg")
+
+[node name="stage2" type="Button" parent="StagesMenu"]
+layout_mode = 0
+offset_left = 449.0
+offset_top = 391.0
+offset_right = 671.0
+offset_bottom = 624.0
+theme_override_colors/font_outline_color = Color(0.285277, 0.338826, 0.174856, 1)
+theme_override_constants/outline_size = 82
+theme_override_fonts/font = ExtResource("10_70i5f")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = SubResource("StyleBoxFlat_mj5lg")
+text = "2"
+
+[node name="PB" type="Label" parent="StagesMenu/stage2"]
 layout_mode = 0
 offset_left = 58.0
 offset_top = 181.0
@@ -279,6 +311,7 @@ horizontal_alignment = 1
 script = ExtResource("11_mj5lg")
 
 [node name="MainMenuButton" type="Button" parent="StagesMenu"]
+layout_mode = 0
 offset_left = 528.0
 offset_top = 918.0
 offset_right = 1365.0
@@ -295,5 +328,6 @@ text = "Back to Main Menu"
 [connection signal="pressed" from="MainMenu/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="StagesMenu/Stage1" to="." method="_on_stage_1_pressed"]
+[connection signal="pressed" from="StagesMenu/stage1" to="." method="_on_stage_1_pressed"]
+[connection signal="pressed" from="StagesMenu/stage2" to="." method="_on_stage_2_pressed"]
 [connection signal="pressed" from="StagesMenu/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

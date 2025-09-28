@@ -50,11 +50,12 @@ func update_stonebox():
 		rock.modulate = color
 		arock.modulate = color
 
-
+@onready var stoneSo = $stone
 
 func stoned():
 	if available_stones > 0:
 		# Make a new stone at player’s current position
+		stoneSo.play()
 		var stone = StoneScene.instantiate()
 		stone.global_position = global_position
 
@@ -170,6 +171,9 @@ func stop_squish():
 		gravity_mult = 1.0
 	)
 
+@onready var jumpso = $jump
+@onready var swooshso = $soowsh
+
 func _physics_process(delta: float) -> void:
 	# Apply gravity, scaled by gravity_mult, only while airborne
 	if not is_on_floor():
@@ -183,15 +187,16 @@ func _physics_process(delta: float) -> void:
 		hasJumped = true
 		particles()
 		$Sprite2D.texture = load("res://textures/Rock man game jumping-.png")
+		jumpso.play(0.35)
 		velocity.y = JUMP_VELOCITY
 
 	if not hasJumped:
 		$Sprite2D.texture = load("res://textures/Stone game Player Standing.png")
 
-	# Squish input handling: usable anytime, no movAllow gate here (per your request).
 	# Start squish on just_pressed, stop on just_released.
 	if Input.is_action_just_pressed("squish"):
 		start_squish()
+		swooshso.play(0.1)
 	elif Input.is_action_just_released("squish"):
 		stop_squish()
 

@@ -1,7 +1,8 @@
 extends Label
 
 func _ready() -> void:
-	var stage_name = "stage1"
+	var stage_name = get_parent().name
+	print(stage_name)
 	var pb = TimerManager.best_times.get(stage_name, INF)
 
 	if pb == INF:

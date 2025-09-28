@@ -31,3 +31,7 @@ func _on_main_menu_button_pressed() -> void:
 
 func _on_stage_1_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/World.tscn")
+
+
+func _on_stage_2_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/world2.tscn")
