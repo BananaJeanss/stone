@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://behfh1q5td6xg"]
+[gd_scene load_steps=48 format=4 uid="uid://behfh1q5td6xg"]
 
 [ext_resource type="Script" uid="uid://dg233ak7d8gwf" path="res://scripts/world.gd" id="1_b3faq"]
 [ext_resource type="Texture2D" uid="uid://b05u4a3n1qlra" path="res://textures/images.png" id="1_bcbcq"]
@@ -21,6 +21,7 @@
 [ext_resource type="AudioStream" uid="uid://b82p5aus1ta6x" path="res://audio/stone.mp3" id="14_yncth"]
 [ext_resource type="Texture2D" uid="uid://ciivuuksc53nl" path="res://textures/Spikes Medium.png" id="16_30fn3"]
 [ext_resource type="Texture2D" uid="uid://bmyaf1l8fvfne" path="res://textures/aa.png" id="16_o1tcx"]
+[ext_resource type="Texture2D" uid="uid://cjdif7obiqfts" path="res://textures/Rock.png" id="17_4q8dg"]
 [ext_resource type="Texture2D" uid="uid://7tfhbdaflsih" path="res://textures/spikes short.png" id="17_dgldv"]
 [ext_resource type="Texture2D" uid="uid://dm4mrq3a5himm" path="res://textures/Sign.png" id="17_rpuxp"]
 [ext_resource type="FontFile" uid="uid://b3gix6t1pih4a" path="res://fonts/SUSEMono-Italic-VariableFont_wght.ttf" id="18_nthub"]
@@ -914,17 +915,17 @@ offset_bottom = 177.0
 
 [node name="1" type="TextureRect" parent="UI/stonebox"]
 layout_mode = 2
-texture = ExtResource("6_hlk0d")
+texture = ExtResource("17_4q8dg")
 expand_mode = 2
 
 [node name="2" type="TextureRect" parent="UI/stonebox"]
 layout_mode = 2
-texture = ExtResource("6_hlk0d")
+texture = ExtResource("17_4q8dg")
 expand_mode = 2
 
 [node name="3" type="TextureRect" parent="UI/stonebox"]
 layout_mode = 2
-texture = ExtResource("6_hlk0d")
+texture = ExtResource("17_4q8dg")
 expand_mode = 2
 
 [node name="ProgressBar" type="ProgressBar" parent="UI"]

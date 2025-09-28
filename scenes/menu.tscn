@@ -11,7 +11,7 @@
 [ext_resource type="Shader" uid="uid://cle260hi6vb3e" path="res://scenes/menu.gdshader" id="8_i6lef"]
 [ext_resource type="Texture2D" uid="uid://cb5eajeq47cu0" path="res://textures/pixil-frame-0.png" id="9_ufwb2"]
 [ext_resource type="FontFile" uid="uid://b3gix6t1pih4a" path="res://fonts/SUSEMono-Italic-VariableFont_wght.ttf" id="10_70i5f"]
-[ext_resource type="Script" uid="uid://bjogwympullyx" path="res://scenes/pb.gd" id="11_mj5lg"]
+[ext_resource type="Script" uid="uid://bjogwympullyx" path="res://scripts/pb.gd" id="11_mj5lg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_con2f"]
 bg_color = Color(0, 0, 0, 1)
@@ -189,6 +189,7 @@ offset_bottom = 465.0
 texture = ExtResource("9_ufwb2")
 
 [node name="MainMenu" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_right = 1917.0
 offset_bottom = 1084.0
@@ -246,7 +247,6 @@ theme = SubResource("Theme_i6lef")
 texture = SubResource("GradientTexture2D_ufwb2")
 
 [node name="StagesMenu" type="Control" parent="."]
-visible = false
 anchors_preset = 0
 offset_right = 1918.0
 offset_bottom = 1085.0
@@ -263,10 +263,10 @@ text = "Stages"
 
 [node name="stage1" type="Button" parent="StagesMenu"]
 layout_mode = 0
-offset_left = 102.0
-offset_top = 490.0
-offset_right = 324.0
-offset_bottom = 723.0
+offset_left = 344.0
+offset_top = 396.0
+offset_right = 566.0
+offset_bottom = 629.0
 theme_override_colors/font_outline_color = Color(0.252269, 0.377261, 0.258861, 1)
 theme_override_constants/outline_size = 82
 theme_override_fonts/font = ExtResource("10_70i5f")
@@ -288,10 +288,10 @@ script = ExtResource("11_mj5lg")
 
 [node name="stage2" type="Button" parent="StagesMenu"]
 layout_mode = 0
-offset_left = 449.0
-offset_top = 391.0
-offset_right = 671.0
-offset_bottom = 624.0
+offset_left = 801.0
+offset_top = 397.0
+offset_right = 1023.0
+offset_bottom = 630.0
 theme_override_colors/font_outline_color = Color(0.285277, 0.338826, 0.174856, 1)
 theme_override_constants/outline_size = 82
 theme_override_fonts/font = ExtResource("10_70i5f")
@@ -300,6 +300,30 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_mj5lg")
 text = "2"
 
 [node name="PB" type="Label" parent="StagesMenu/stage2"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 181.0
+offset_right = 157.0
+offset_bottom = 216.0
+theme_override_font_sizes/font_size = 25
+text = "0:00.000"
+horizontal_alignment = 1
+script = ExtResource("11_mj5lg")
+
+[node name="stage3" type="Button" parent="StagesMenu"]
+layout_mode = 0
+offset_left = 1264.0
+offset_top = 397.0
+offset_right = 1486.0
+offset_bottom = 630.0
+theme_override_colors/font_outline_color = Color(0.297497, 0.240392, 0.118257, 1)
+theme_override_constants/outline_size = 82
+theme_override_fonts/font = ExtResource("10_70i5f")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = SubResource("StyleBoxFlat_mj5lg")
+text = "3"
+
+[node name="PB" type="Label" parent="StagesMenu/stage3"]
 layout_mode = 0
 offset_left = 58.0
 offset_top = 181.0
@@ -330,4 +354,5 @@ text = "Back to Main Menu"
 [connection signal="pressed" from="MainMenu/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="StagesMenu/stage1" to="." method="_on_stage_1_pressed"]
 [connection signal="pressed" from="StagesMenu/stage2" to="." method="_on_stage_2_pressed"]
+[connection signal="pressed" from="StagesMenu/stage3" to="." method="_on_stage_3_pressed"]
 [connection signal="pressed" from="StagesMenu/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
