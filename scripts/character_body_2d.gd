@@ -136,7 +136,6 @@ func start_squish():
 		squish_tween = null
 	)
 
-	# also set gravity_mult immediately so the gameplay effect is felt even during the tween
 	gravity_mult = SQUISH_GRAVITY_MULT
 
 
@@ -190,8 +189,11 @@ func _physics_process(delta: float) -> void:
 		jumpso.play(0.35)
 		velocity.y = JUMP_VELOCITY
 
-	if not hasJumped:
+	if not hasJumped and not squished:
 		$Sprite2D.texture = load("res://textures/Stone game Player Standing.png")
+	else:
+		if squished:
+			$Sprite2D.texture = load("res://textures/crouching texture.png")
 
 	# Start squish on just_pressed, stop on just_released.
 	if Input.is_action_just_pressed("squish"):
