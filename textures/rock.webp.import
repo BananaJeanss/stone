@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bb2w1efdegglm"
-path="res://.godot/imported/a-large-rock-with-a-grey-and-brown-color-it-is-a-solid-piece-of-rock-with-no-visible-cracks-or-crevices-png.webp-d2484291e3f8c866dd796970713ea9f2.ctex"
+path="res://.godot/imported/rock.webp-d1486248051223d89f34992d3b9ae5b1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/a-large-rock-with-a-grey-and-brown-color-it-is-a-solid-piece-of-rock-with-no-visible-cracks-or-crevices-png.webp"
-dest_files=["res://.godot/imported/a-large-rock-with-a-grey-and-brown-color-it-is-a-solid-piece-of-rock-with-no-visible-cracks-or-crevices-png.webp-d2484291e3f8c866dd796970713ea9f2.ctex"]
+source_file="res://textures/rock.webp"
+dest_files=["res://.godot/imported/rock.webp-d1486248051223d89f34992d3b9ae5b1.ctex"]
 
 [params]
 

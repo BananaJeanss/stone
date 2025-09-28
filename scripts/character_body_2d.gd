@@ -35,15 +35,22 @@ func reset_to_spawn():
 		else:
 			break
 
+@onready var anotherbox = get_node("/root/Node2D/Passed/ColorRect/stonebox")
+
 func update_stonebox():
 	for i in range(3):
-		var rock = stonebox.get_node(str(i + 1)) # Assuming names are "1", "2", "3"
-		if i < available_stones:
-			# Active stone: normal color
-			rock.modulate = Color(1, 1, 1, 1)
-		else:
-			# Used stone: grayscale
-			rock.modulate = Color(0.2, 0.2, 0.2, 1)
+		# Get stones from both boxes
+		var rock = stonebox.get_node(str(i + 1))
+		var arock = anotherbox.get_node(str(i + 1))
+
+		# Determine color based on availability
+		var color = Color(1, 1, 1, 1) if i < available_stones else Color(0.2, 0.2, 0.2, 1)
+
+		# Apply to both boxes
+		rock.modulate = color
+		arock.modulate = color
+
+
 
 func stoned():
 	if available_stones > 0:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://em08oeq4qa5e"]
 
-[ext_resource type="Texture2D" uid="uid://bb2w1efdegglm" path="res://textures/a-large-rock-with-a-grey-and-brown-color-it-is-a-solid-piece-of-rock-with-no-visible-cracks-or-crevices-png.webp" id="1_fao45"]
+[ext_resource type="Texture2D" uid="uid://bb2w1efdegglm" path="res://textures/rock.webp" id="1_fao45"]
 
 [node name="Passed" type="CanvasLayer"]
 
@@ -12,6 +12,7 @@ offset_bottom = 903.0
 color = Color(0, 0, 0, 0.396078)
 
 [node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 0
 offset_left = 285.0
 offset_top = 17.0
 offset_right = 914.0
@@ -29,6 +30,7 @@ theme_override_font_sizes/font_size = 50
 text = "Time: 0:00.00"
 
 [node name="stonebox" type="HBoxContainer" parent="ColorRect"]
+layout_mode = 0
 offset_left = 397.0
 offset_top = 293.0
 offset_right = 747.0
