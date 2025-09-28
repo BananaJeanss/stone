@@ -189,7 +189,6 @@ offset_bottom = 465.0
 texture = ExtResource("9_ufwb2")
 
 [node name="MainMenu" type="Control" parent="."]
-visible = false
 anchors_preset = 0
 offset_right = 1917.0
 offset_bottom = 1084.0
@@ -247,6 +246,7 @@ theme = SubResource("Theme_i6lef")
 texture = SubResource("GradientTexture2D_ufwb2")
 
 [node name="StagesMenu" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_right = 1918.0
 offset_bottom = 1085.0
